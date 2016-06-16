@@ -298,32 +298,32 @@ void BookHists()
   TH1F* htransP_particlepT = new TH1F("htransP_particlepT","transP; particle p_{T} [GeV]",1000,0,50);
   TH1F* htransP_particleeta = new TH1F("htransP_particleeta","transP; particle #eta",66,-1.5,1.5);
   TH1F* htransP_particlephi = new TH1F("htransP_particlephi","transP; particle #phi",120,-3.14159,3.14159);
-  TH1F* htransP_numparticle = new TH1F("htransP_numparticle","transP; particle multiplicity",20,0,20);
+  TH1F* htransP_numparticle = new TH1F("htransP_numparticle","transP; particle multiplicity",80,0,20);
 
   TH1F* htransM_particlepT = new TH1F("htransM_particlepT","transM; particle p_{T} [GeV]",1000,0,50);
   TH1F* htransM_particleeta = new TH1F("htransM_particleeta","transM; particle #eta",66,-1.5,1.5);
   TH1F* htransM_particlephi = new TH1F("htransM_particlephi","transM; particle #phi",120,-3.14159,3.14159);
-  TH1F* htransM_numparticle = new TH1F("htransM_numparticle","transM; particle multiplicity",20,0,20);
+  TH1F* htransM_numparticle = new TH1F("htransM_numparticle","transM; particle multiplicity",80,0,20);
 
   TH1F* htransMax_particlepT = new TH1F("htransMax_particlepT","transMax; particle p_{T} [GeV]",1000,0,50);
   TH1F* htransMax_particleeta = new TH1F("htransMax_particleeta","transMax; particle #eta",66,-1.5,1.5);
   TH1F* htransMax_particlephi = new TH1F("htransMax_particlephi","transMax; particle #phi",120,-3.14159,3.14159);
-  TH1F* htransMax_numparticle = new TH1F("htransMax_numparticle","transMax; particle multiplicity",20,0,20);
+  TH1F* htransMax_numparticle = new TH1F("htransMax_numparticle","transMax; particle multiplicity",80,0,20);
 
   TH1F* htransMin_particlepT = new TH1F("htransMin_particlepT","transMin; particle p_{T} [GeV]",1000,0,50);
   TH1F* htransMin_particleeta = new TH1F("htransMin_particleeta","transMin; particle #eta",66,-1.5,1.5);
   TH1F* htransMin_particlephi = new TH1F("htransMin_particlephi","transMin; particle #phi",120,-3.14159,3.14159);
-  TH1F* htransMin_numparticle = new TH1F("htransMin_numparticle","transMin; particle multiplicity",20,0,20);
+  TH1F* htransMin_numparticle = new TH1F("htransMin_numparticle","transMin; particle multiplicity",80,0,20);
 
   TH1F* haway_particlepT = new TH1F("haway_particlepT","away; particle p_{T} [GeV]",1000,0,50);
   TH1F* haway_particleeta = new TH1F("haway_particleeta","away; particle #eta",66,-1.5,1.5);
   TH1F* haway_particlephi = new TH1F("haway_particlephi","away; particle #phi",120,-3.14159,3.14159);
-  TH1F* haway_numparticle = new TH1F("haway_numparticle","away; particle multiplicity",20,0,20);
+  TH1F* haway_numparticle = new TH1F("haway_numparticle","away; particle multiplicity",80,0,20);
 
   TH1F* htoward_particlepT = new TH1F("htoward_particlepT","toward; particle p_{T} [GeV]",1000,0,50);
   TH1F* htoward_particleeta = new TH1F("htoward_particleeta","toward; particle #eta",66,-1.5,1.5);
   TH1F* htoward_particlephi = new TH1F("htoward_particlephi","toward; particle #phi",120,-3.14159,3.14159);
-  TH1F* htoward_numparticle = new TH1F("htoward_numparticle","away; particle multiplicity",20,0,20);
+  TH1F* htoward_numparticle = new TH1F("htoward_numparticle","away; particle multiplicity",80,0,20);
   
   //Event Histograms
   TH2F* htransP_numParticleVsMaxJetpT = new TH2F("htransP_numParticleVsMaxJetpT","transP; jet p_{T} [GeV]; particle multiplicity",95,5,100,30,0,30);
