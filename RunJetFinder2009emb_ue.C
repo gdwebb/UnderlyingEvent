@@ -5,19 +5,20 @@
 //
 
 void RunJetFinder2009emb_ue(int nevents = 1e6,
-			 const char* mudstfile = "/gpfs01/star/scratch/gdwebb/Embedding_inclu/10103041/pt9_11_10103041_6.MuDst.root",
-			 const char* geantfile = "/gpfs01/star/scratch/gdwebb/Embedding_inclu/10103041/pt9_11_10103041_6.geant.root",
-		
-			 const char* jetfile   = "pt9_11_10103041_6.jets.root",
-			 const char* skimfile  = "pt9_11_10103041_6.skim.root",
-			 const char* uefile  = "pt9_11_10103041_6.ue.root",
+			    const char* mudstfile = "/gpfs01/star/scratch/gdwebb/Embedding_inclu/10103041/pt9_11_10103041_6.MuDst.root",
+			    const char* geantfile = "/gpfs01/star/scratch/gdwebb/Embedding_inclu/10103041/pt9_11_10103041_6.geant.root",
+			    const char* jetfile   = "pt9_11_10103041_6.jets.root",
+			    const char* skimfile  = "pt9_11_10103041_6.skim.root",
+			    const char* uefile  = "pt9_11_10103041_6.ue_region.root",
+			    const char* uefile2 = "pt9_11_10103041_6.ue_offcone.root",
 			 bool useL2 = false)
 {
   cout << "Read MuDst file:\t" << mudstfile << endl;
   cout << "Read geant file:\t" << geantfile << endl;
   cout << "Write jet file:\t" << jetfile << endl;
   cout << "Write skim file:\t" << skimfile << endl;
-  cout << "Write ue file:\t" << uefile << endl;
+  cout << "Write ue region file:\t" << uefile << endl;
+  cout << "Write ue off cone file:\t" << uefile2 << endl; 
 
   gROOT->Macro("loadMuDst.C");
   gROOT->Macro("LoadLogger.C");
@@ -133,8 +134,9 @@ void RunJetFinder2009emb_ue(int nevents = 1e6,
   skimEventMaker->addSimuTrigger(230420); // AJP
 
   // Jet maker
-  StJetMaker2009* jetmaker = new StJetMaker2009;
+  StJetMaker2012* jetmaker = new StJetMaker2012;
   jetmaker->setJetFile(jetfile);
+  jetmaker->setJetFileUe(uefile2);
 
   // UE maker
   StUEMaker2009* uemaker = new StUEMaker2009;
@@ -190,19 +192,19 @@ void RunJetFinder2009emb_ue(int nevents = 1e6,
 
   // _________________ Regional Criteria_____________________
 
-  anapars12_tow = anapars12;
+  StAnaPars *anapars12_tow = new StAnaPars(*anapars12);
   anapars12_tow->setTrackRegion(new StjTrackRegion(60.0,-60.0,1.0));
   anapars12_tow->setTowerRegion(new StjTowerRegion(60.0,-60.0,1.0));
   
-  anapars12_away = anapars12;
+  StAnaPars *anapars12_away = new StAnaPars(*anapars12);
   anapars12_away->setTrackRegion(new StjTrackRegion(120.0,-120.0,1.0));
   anapars12_away->setTowerRegion(new StjTowerRegion(120.0,-120.0,1.0));
  
-  anapars12_transPlus = anapars12;
+  StAnaPars *anapars12_transPlus = new StAnaPars(*anapars12);
   anapars12_transPlus->setTrackRegion(new StjTrackRegion(120.0,60.0,1.0));
   anapars12_transPlus->setTowerRegion(new StjTowerRegion(120.0,60.0,1.0));
 
-  anapars12_transMinus = anapars12;
+  StAnaPars *anapars12_transMinus = new StAnaPars(*anapars12);
   anapars12_transMinus->setTrackRegion(new StjTrackRegion(-60.0,-120.0,1.0));
   anapars12_transMinus->setTowerRegion(new StjTowerRegion(-60.0,-120.0,1.0));
 
@@ -216,16 +218,16 @@ void RunJetFinder2009emb_ue(int nevents = 1e6,
   anaparsParticle->addJetCut(new StProtoJetCutPt(3,200));
   anaparsParticle->addJetCut(new StProtoJetCutEta(-100,100));
   
-  anaparsParticle_toward = anaparsParticle;
+  StAnaPars* anaparsParticle_toward = new StAnaPars(*anaparsParticle);
   anaparsParticle_toward->setParticleRegion(new StjMCParticleRegion(60.0,-60.0,1.0));
 
-  anaparsParticle_away = anaparsParticle;
+  StAnaPars* anaparsParticle_away = new StAnaPars(*anaparsParticle);
   anaparsParticle_away->setParticleRegion(new StjMCParticleRegion(120.0,-120.0,1.0));
 
-  anaparsParticle_transPlus = anaparsParticle;
+  StAnaPars* anaparsParticle_transPlus = new StAnaPars(*anaparsParticle);
   anaparsParticle_transPlus->setParticleRegion(new StjMCParticleRegion(120.0,60.0,1.0));
 
-  anaparsParticle_transMinus = anparsParticle;
+  StAnaPars* anaparsParticle_transMinus = new StAnaPars(*anaparsParticle);
   anaparsParticle_transMinus->setParticleRegion(new StjMCParticleRegion(-60.0,-120.0,1.0));
 
   //------------------------------------------------------------------------------------
@@ -238,16 +240,16 @@ void RunJetFinder2009emb_ue(int nevents = 1e6,
   anaparsParton->addJetCut(new StProtoJetCutPt(3,200));
   anaparsParton->addJetCut(new StProtoJetCutEta(-100,100));
   
-  anaparsParton_toward = anaparsParton;
+  StAnaPars* anaparsParton_toward = new StAnaPars(*anaparsParton);
   anaparsParton_toward->setParticleRegion(new StjMCParticleRegion(60.0,-60.0,1.0));
   
-  anaparsParton_away = anaparsParton;
+  StAnaPars* anaparsParton_away = new StAnaPars(*anaparsParton);
   anaparsParton_away->setParticleRegion(new StjMCParticleRegion(120.0,-120.0,1.0));
 
-  anaparsParton_transPlus = anaparsParton;
+  StAnaPars* anaparsParton_transPlus = new StAnaPars(*anaparsParton);
   anaparsParton_transPlus->setParticleRegion(new StjMCParticleRegion(120.0,60.0,1.0));
 
-  anaparsParton_transMinus = anaparsParton;
+  StAnaPars* anaparsParton_transMinus = new StAnaPars(*anaparsParton);
   anaparsParton_transMinus->setParticleRegion(new StjMCParticleRegion(-60.0,-120.0,1.0));
   
   //--------------------------------------------------------------------------------------------
@@ -268,7 +270,6 @@ void RunJetFinder2009emb_ue(int nevents = 1e6,
   jetmaker->addBranch("AntiKtR060Parton",anaparsParton,AntiKtR060Pars);
   jetmaker->addBranch("AntiKtR060NHits12",anapars12,AntiKtR060Pars);
  
-
   uemaker->addBranch("toward",anapars12_tow,"AntiKtR060NHits12");
   uemaker->addBranch("away",anapars12_away,"AntiKtR060NHits12");
   uemaker->addBranch("transP",anapars12_transPlus,"AntiKtR060NHits12");
@@ -283,7 +284,8 @@ void RunJetFinder2009emb_ue(int nevents = 1e6,
   uemaker->addBranch("away",anaparsParton_away,"AntiKtR060Parton");
   uemaker->addBranch("transP",anaparsParton_transPlus,"AntiKtR060Parton");
   uemaker->addBranch("transM",anaparsParton_transMinus,"AntiKtR060Parton");
-
+  StOffAxisConesPars *off060 = new StOffAxisConesPars(0.6);
+  jetmaker->addUeBranch("OffAxisConesR060", off060);
   //------------------------------------------------------------------------------------
 
 
