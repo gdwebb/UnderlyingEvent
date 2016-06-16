@@ -16,3 +16,6 @@
 #ignore cons output
 .consign
 .sl64_gcc482
+
+#ignore root files 
+*.root
