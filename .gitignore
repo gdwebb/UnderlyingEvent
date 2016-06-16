@@ -19,3 +19,8 @@
 
 #ignore root files 
 *.root
+
+#ignore the temp_gccflags.c file 
+temp_gccflag.c 
+grantsUECode_fzd.package/
+grantsUECode_fzd.zip
